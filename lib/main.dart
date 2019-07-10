@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+import './page/hot/hot_home.dart';
+import './page/member/member_home.dart';
+import './page/movie/movie_home.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -27,13 +31,11 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _currenIndex = 0;
 
-  final _widgetItems = [Text("热映"),Text("找片"),Text("我的")];
+  final _widgetItems = [HotWidget(),MovieWidget(),MemberWidget()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: _widgetItems[_currenIndex],
-      ),
+      body: _widgetItems[_currenIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currenIndex,
         items: [
