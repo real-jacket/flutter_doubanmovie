@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../component/search_bar.dart';
+import '../../utils/style.dart';
 
 class MovieWidget extends StatefulWidget {
   @override
@@ -26,6 +27,7 @@ class _MovieWidgetState extends State<MovieWidget> {
                 indicatorColor: Colors.black87,
                 tabs: <Widget>[Tab(text: "电影"), Tab(text: "电视")],
               ),
+              Gaps.line,
               Expanded(
                 child: Container(
                   child: TabBarView(

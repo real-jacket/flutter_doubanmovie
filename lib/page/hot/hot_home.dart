@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../component/search_bar.dart';
+import '../../utils/style.dart';
+
 
 class HotWidget extends StatefulWidget {
   @override
@@ -26,6 +28,7 @@ class _HotWidgetState extends State<HotWidget> {
                 indicatorColor: Colors.black87,
                 tabs: <Widget>[Tab(text: "正在热映"), Tab(text: "即将上映")],
               ),
+              Gaps.line,
               Expanded(
                 child: Container(
                   child: TabBarView(
