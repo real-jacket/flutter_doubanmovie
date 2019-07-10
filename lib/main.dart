@@ -31,24 +31,28 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _currenIndex = 0;
 
-  final _widgetItems = [HotWidget(),MovieWidget(),MemberWidget()];
+  final _widgetItems = [HotWidget(), MovieWidget(), MemberWidget()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _widgetItems[_currenIndex],
+      body: SafeArea(
+        child: _widgetItems[_currenIndex],
+      ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currenIndex,
         items: [
-        BottomNavigationBarItem(icon: Icon(Icons.school),title: Text("热映")),
-        BottomNavigationBarItem(icon: Icon(Icons.panorama_fish_eye),title: Text("找片")),
-        BottomNavigationBarItem(icon: Icon(Icons.people),title: Text("我的"))
-      ],
-      fixedColor: Colors.black,
-      onTap: (e){
-        setState(() {
-         _currenIndex = e;
-        });
-      },),
+          BottomNavigationBarItem(icon: Icon(Icons.school), title: Text("热映")),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.panorama_fish_eye), title: Text("找片")),
+          BottomNavigationBarItem(icon: Icon(Icons.people), title: Text("我的"))
+        ],
+        fixedColor: Colors.black,
+        onTap: (e) {
+          setState(() {
+            _currenIndex = e;
+          });
+        },
+      ),
     );
   }
 }
