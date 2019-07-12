@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../component/search_bar.dart';
+import '../../component/SearchBar.dart';
 import '../../utils/style.dart';
-
+import '../../component/MovieListWidget.dart';
 
 class HotWidget extends StatefulWidget {
   @override
@@ -33,9 +33,7 @@ class _HotWidgetState extends State<HotWidget> {
                 child: Container(
                   child: TabBarView(
                     children: <Widget>[
-                      Center(
-                        child: Text('正在热映'),
-                      ),
+                      MovieListWidget(),
                       Center(
                         child: Text('即将上映'),
                       )

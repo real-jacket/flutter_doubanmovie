@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../component/search_bar.dart';
+import '../../component/SearchBar.dart';
 import '../../utils/style.dart';
 
 class MovieWidget extends StatefulWidget {
