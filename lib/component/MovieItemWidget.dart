@@ -11,9 +11,9 @@ class MovieItemWidget extends StatefulWidget {
 
 class _MovieItemWidgetState extends State<MovieItemWidget> {
   String _getName(List<Cast> dataList) {
-    String name = "";
-    for (var item in dataList) {
-      name += "/" + item.name;
+    String name = dataList[0].name??"";
+    for (var i = 1; i < dataList.length; i++) {
+      name += "/" + dataList[i].name;
     }
     return name;
   }
