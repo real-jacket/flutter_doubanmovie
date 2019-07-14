@@ -10,10 +10,12 @@ class MovieListWidget extends StatefulWidget {
   _MovieListWidgetState createState() => _MovieListWidgetState();
 }
 
-class _MovieListWidgetState extends State<MovieListWidget> {
+class _MovieListWidgetState extends State<MovieListWidget>
+    with AutomaticKeepAliveClientMixin {
   List<MovieData> movieDatas = new List<MovieData>();
 
   @override
+  bool get wantKeepAlive => true;
   void initState() {
     super.initState();
     _getData();
@@ -37,6 +39,7 @@ class _MovieListWidgetState extends State<MovieListWidget> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     if (movieDatas == null || movieDatas.isEmpty) {
       return Center(
         child: CircularProgressIndicator(),
