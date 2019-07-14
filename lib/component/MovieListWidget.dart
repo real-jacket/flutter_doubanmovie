@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import './MovieData.dart';
 import './MovieItemWidget.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 class MovieListWidget extends StatefulWidget {
   @override
@@ -14,49 +16,48 @@ class _MovieListWidgetState extends State<MovieListWidget> {
   @override
   void initState() {
     super.initState();
-    var data = MovieData(
-        "看不见的客人",
-        8.8,
-        "奥里奥尔·保罗",
-        "马里奥·卡萨斯/阿娜·瓦格纳/何塞·科罗纳多/巴巴拉·莱涅/弗兰塞斯克·奥雷利",
-        5,
-        "https://img3.doubanio.com/view/photo/l/public/p2449229311.webp");
+    _getData();
+  }
 
-    setState(() {
-      movieDatas.add(data);
-      movieDatas.add(data);
-      movieDatas.add(data);
-      movieDatas.add(data);
-      movieDatas.add(data);
-      movieDatas.add(data);
-      movieDatas.add(data);
-      movieDatas.add(data);
-      movieDatas.add(data);
-      movieDatas.add(data);
-      movieDatas.add(data);
-      movieDatas.add(data);
-      movieDatas.add(data);
-      movieDatas.add(data);
-    });
+  void _getData() async {
+    List<MovieData> serverDataList = List();
+    var response = await http.get(
+        "https://api.douban.com/v2/movie/in_theaters?apikey=0b2bdeda43b5688921839c8ecb20399b&city=广州&start=0&count=10");
+    if (response.statusCode == 200) {
+      var responseJson = json.decode(response.body);
+      for (dynamic data in responseJson['subjects']) {
+        MovieData movieData = MovieData.formJson(data);
+        serverDataList.add(movieData);
+      }
+      setState(() {
+        movieDatas = serverDataList;
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return MediaQuery.removePadding(
-      removeTop: true,
-      context: context,
-      child: ListView.separated(
-        itemCount: movieDatas.length,
-        itemBuilder: (context, index) {
-          return MovieItemWidget(movieDatas[index]);
-        },
-        separatorBuilder: (context, index) {
-          return Divider(
-            height: 1,
-            color: Colors.black26,
-          );
-        },
-      ),
-    );
+    if (movieDatas == null || movieDatas.isEmpty) {
+      return Center(
+        child: CircularProgressIndicator(),
+      );
+    } else {
+      return MediaQuery.removePadding(
+        removeTop: true,
+        context: context,
+        child: ListView.separated(
+          itemCount: movieDatas.length,
+          itemBuilder: (context, index) {
+            return MovieItemWidget(movieDatas[index]);
+          },
+          separatorBuilder: (context, index) {
+            return Divider(
+              height: 1,
+              color: Colors.black26,
+            );
+          },
+        ),
+      );
+    }
   }
 }

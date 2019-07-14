@@ -10,6 +10,14 @@ class MovieItemWidget extends StatefulWidget {
 }
 
 class _MovieItemWidgetState extends State<MovieItemWidget> {
+  String _getName(List<Cast> dataList) {
+    String name = "";
+    for (var item in dataList) {
+      name += "/" + item.name;
+    }
+    return name;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -19,7 +27,7 @@ class _MovieItemWidgetState extends State<MovieItemWidget> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Image.network(
-            widget.movieData.images,
+            widget.movieData.images.medium,
             width: 80,
             height: 120,
             fit: BoxFit.contain,
@@ -35,17 +43,21 @@ class _MovieItemWidgetState extends State<MovieItemWidget> {
                   Text(
                     widget.movieData.title,
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
                   ),
                   Text(
-                    widget.movieData.rating.toString(),
+                    widget.movieData.rating.average.toString(),
                     style: TextStyle(fontSize: 14, color: Colors.black54),
                   ),
                   Text(
-                    '导演： ' + widget.movieData.director,
+                    '导演： ' + _getName(widget.movieData.directors),
                     style: TextStyle(fontSize: 14, color: Colors.black54),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 2,
                   ),
                   Text(
-                    '主演： ' + widget.movieData.castsl,
+                    '主演： ' + _getName(widget.movieData.casts),
                     style: TextStyle(fontSize: 14, color: Colors.black54),
                     overflow: TextOverflow.ellipsis,
                     maxLines: 2,
@@ -56,7 +68,7 @@ class _MovieItemWidgetState extends State<MovieItemWidget> {
           ),
           Container(
             width: 90,
-            padding: EdgeInsets.only(left: 15,right: 15),
+            // padding: EdgeInsets.only(left: 15,right: 15),
             alignment: Alignment.center,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -73,7 +85,7 @@ class _MovieItemWidgetState extends State<MovieItemWidget> {
                   onPressed: () {},
                 ),
                 Text(
-                  widget.movieData.watchedPeople.toString() + "万人看过",
+                  widget.movieData.collectCount.toString() + "人看过",
                   style: TextStyle(color: Colors.red, fontSize: 12),
                 )
               ],
