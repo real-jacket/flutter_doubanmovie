@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
 class SearchBar extends StatefulWidget {
-  SearchBar({Key key, this.index = 0}) : super(key: key);
+  SearchBar({Key key, this.index = 0,this.city}) : super(key: key);
 
   final int index;
+  final String city;
   @override
   _SearchBarState createState() => _SearchBarState();
 }
@@ -20,7 +21,12 @@ class _SearchBarState extends State<SearchBar> {
             child: widget.index == 0
                 ? Row(
                     children: <Widget>[
-                      Text("北京"),
+                      GestureDetector(
+                        child: Text(widget.city),
+                        onTap: () {
+                          Navigator.pushNamed(context, '/Citys',arguments: widget.city);
+                        },
+                      ),
                       Icon(Icons.arrow_drop_down),
                     ],
                   )

@@ -6,6 +6,8 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class MovieListWidget extends StatefulWidget {
+  MovieListWidget(this.city) : super();
+  final String city;
   @override
   _MovieListWidgetState createState() => _MovieListWidgetState();
 }
@@ -24,7 +26,7 @@ class _MovieListWidgetState extends State<MovieListWidget>
   void _getData() async {
     List<MovieData> serverDataList = List();
     var response = await http.get(
-        "https://api.douban.com/v2/movie/in_theaters?apikey=0b2bdeda43b5688921839c8ecb20399b&city=广州&start=0&count=10");
+        "https://api.douban.com/v2/movie/in_theaters?apikey=0b2bdeda43b5688921839c8ecb20399b&city=${widget.city}&start=0&count=10");
     if (response.statusCode == 200) {
       var responseJson = json.decode(response.body);
       for (dynamic data in responseJson['subjects']) {

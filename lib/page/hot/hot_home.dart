@@ -10,12 +10,14 @@ class HotWidget extends StatefulWidget {
 }
 
 class _HotWidgetState extends State<HotWidget> {
+  String curCity = '深圳';
+
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
-        SearchBar(),
+        SearchBar(city:curCity),
         Expanded(
             child: DefaultTabController(
           length: 2,
@@ -23,7 +25,7 @@ class _HotWidgetState extends State<HotWidget> {
             children: <Widget>[
               TabBar(
                 indicatorSize: TabBarIndicatorSize.label,
-                unselectedLabelColor: Colors.black12,
+                unselectedLabelColor: Colors.black38,
                 labelColor: Colors.black87,
                 indicatorColor: Colors.black87,
                 tabs: <Widget>[Tab(text: "正在热映"), Tab(text: "即将上映")],
@@ -33,7 +35,7 @@ class _HotWidgetState extends State<HotWidget> {
                 child: Container(
                   child: TabBarView(
                     children: <Widget>[
-                      MovieListWidget(),
+                      MovieListWidget(curCity),
                       Center(
                         child: Text('即将上映'),
                       )

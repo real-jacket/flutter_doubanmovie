@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import './page/hot/hot_home.dart';
 import './page/member/member_home.dart';
 import './page/movie/movie_home.dart';
+import './page/citys/CitysWideget.dart';
 
 void main() => runApp(MyApp());
 
@@ -15,6 +16,9 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: MyHomePage(title: '豆瓣电影'),
+      routes: {
+        '/Citys':(context)=> CitysWidget(),
+      },
     );
   }
 }
